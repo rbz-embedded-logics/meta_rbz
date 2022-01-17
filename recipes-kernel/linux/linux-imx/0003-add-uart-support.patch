@@ -1,0 +1,70 @@
+From 53505b07d473752d717d03799f4d6e18d0a11fc5 Mon Sep 17 00:00:00 2001
+From: Marina Calvo <mcalvo@rbz.es>
+Date: Tue, 21 Dec 2021 14:27:38 +0000
+Subject: [PATCH 3/3] add-uart-support
+
+Signed-off-by: Marina Calvo <mcalvo@rbz.es>
+---
+ arch/arm64/boot/dts/rbz/mod-imx8m-plus.dts | 26 ++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/rbz/mod-imx8m-plus.dts b/arch/arm64/boot/dts/rbz/mod-imx8m-plus.dts
+index 4691bebe7e86..b24751e6885f 100644
+--- a/arch/arm64/boot/dts/rbz/mod-imx8m-plus.dts
++++ b/arch/arm64/boot/dts/rbz/mod-imx8m-plus.dts
+@@ -309,12 +309,20 @@
+ &uart1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart1>;
++	assigned-clocks = <&clk IMX8MP_CLK_UART1>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_80M>;
++    fsl,uart-has-rtscts;
++    fsl,dte-mode;
+ 	status = "okay";
+ };
+ 
+ &uart2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart2>;
++	assigned-clocks = <&clk IMX8MP_CLK_UART2>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_80M>;
++    fsl,uart-has-rtscts;
++    fsl,dte-mode;
+ 	status = "okay";
+ };
+ 
+@@ -325,6 +333,15 @@
+ 	status = "okay";
+ };
+ 
++&uart4 {
++    pinctrl-names = "default";
++    pinctrl-0 = <&pinctrl_uart4>;
++    assigned-clocks = <&clk IMX8MP_CLK_UART4>;
++    assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_80M>;
++    /*fsl,uart-has-rtscts;*/
++    status = "okay";
++};
++
+ &usb3_phy0 {
+ 	fsl,phy-tx-preemp-amp-tune = <2>;
+ 	status = "okay";
+@@ -496,6 +513,15 @@
+ 		>;
+ 	};
+ 
++    pinctrl_uart4: uart4grp {
++        fsl,pins = <
++            MX8MP_IOMUXC_UART4_RXD__UART4_DCE_RX        0x140
++            MX8MP_IOMUXC_UART4_TXD__UART4_DCE_TX        0x140
++            MX8MP_IOMUXC_ECSPI2_MISO__UART4_DCE_CTS     0x140
++            MX8MP_IOMUXC_ECSPI2_SS0__UART4_DCE_RTS      0x140
++        >;
++    };   
++
+ 	pinctrl_usb1_vbus: usb1grp {
+ 		fsl,pins = <
+ 			MX8MP_IOMUXC_GPIO1_IO12__GPIO1_IO12	0x19
+-- 
+2.17.1
+
