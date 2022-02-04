@@ -202,7 +202,7 @@ fi
 
 # Enable RBZ layer
 echo "" >> $BUILD_DIR/conf/bblayers.conf
-echo "RBZ layer" >> $BUILD_DIR/conf/bblayers.conf
+echo "# RBZ layer" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-rbz\"" >> $BUILD_DIR/conf/bblayers.conf
 
 echo BSPDIR=$BSPDIR
