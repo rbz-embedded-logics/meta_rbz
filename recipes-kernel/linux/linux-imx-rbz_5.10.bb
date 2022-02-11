@@ -13,7 +13,7 @@ inherit kernel-yocto kernel fsl-kernel-localversion fsl-vivante-kernel-driver-ha
 
 LOCALVERSION ?= ""
 SRCBRANCH = "main"
-SRCREV = "f2c184d9e0350249a9b99028ff172afe7b7f46f4"
+SRCREV = "573caef542ad6145820296f6d6b7116597390071"
 
 
 SRC_URI = "git://github.com/rbz-embedded-logics/linux-imx-rbz.git;protocol=git;branch=${SRCBRANCH} \
@@ -93,4 +93,4 @@ addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
 KERNEL_VERSION_SANITY_SKIP="1"
 
-COMPATIBLE_MACHINE = "(mod_imx8m_plus)"
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
