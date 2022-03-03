@@ -9,7 +9,7 @@ DESCRIPTION = "i.MX U-Boot suppporting RBZ modules."
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS += "flex-native bison-native bc-native dtc-native"
+DEPENDS += "flex-native bison-native bc-native dtc-native u-boot-mkimage-native"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -24,6 +24,14 @@ UBOOT_SRC ?= "git://github.com/rbz-embedded-logics/uboot-imx-rbz.git;protocol=ht
 SRCBRANCH = "main"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 SRCREV = "2635007496bcc6b1bab4b6480aef18b11ce061dc"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-rbz:"
+
+SRC_URI_append = " \
+  file://boot_mini.txt \
+  file://boot_nano.txt \
+  file://boot_plus.txt \
+"
 
 LOCALVERSION = "-${SRCBRANCH}"
 
@@ -46,6 +54,18 @@ do_deploy_append_mx8m() {
         done
         unset  i
     fi
+}
+
+do_deploy_append_mod_imx8m_mini() {
+  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_mini.txt ${DEPLOYDIR}/boot.scr
+}
+
+do_deploy_append_mod_imx8m_nano() {
+  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_nano.txt ${DEPLOYDIR}/boot.scr
+}
+
+do_deploy_append_mod_imx8m_plus() {
+  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_plus.txt ${DEPLOYDIR}/boot.scr
 }
 
 UBOOT_TAGGED_BINARY ?= "u-boot-tagged.${UBOOT_SUFFIX}"

@@ -1,0 +1,6 @@
+setenv fdtfile rbz-carrier-basic-imx8m-nano.dtb
+
+setenv mmcargs "setenv bootargs ${jh_clk} console=${console} root=${mmcroot} ${extra_bootargs}"
+
+run loadimage
+run mmcboot
