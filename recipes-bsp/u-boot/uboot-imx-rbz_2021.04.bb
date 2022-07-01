@@ -23,7 +23,7 @@ PROVIDES += "u-boot"
 UBOOT_SRC ?= "git://github.com/rbz-embedded-logics/uboot-imx-rbz.git;protocol=https"
 SRCBRANCH = "main"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "2635007496bcc6b1bab4b6480aef18b11ce061dc"
+SRCREV = "d4154542689c90521cdbb0c227bb5de9e9c807b8"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-rbz:"
 
@@ -54,18 +54,21 @@ do_deploy_append_mx8m() {
         done
         unset  i
     fi
-}
 
-do_deploy_append_mod_imx8m_mini() {
-  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_mini.txt ${DEPLOYDIR}/boot.scr
-}
+    if [ "${MACHINE}" = "mod_imx8m_mini" ]
+    then
+      mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_mini.txt ${DEPLOYDIR}/boot.scr
+    fi
 
-do_deploy_append_mod_imx8m_nano() {
-  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_nano.txt ${DEPLOYDIR}/boot.scr
-}
-
-do_deploy_append_mod_imx8m_plus() {
-  mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_plus.txt ${DEPLOYDIR}/boot.scr
+    if [ "${MACHINE}" = "mod_imx8m_nano" ]
+    then
+      mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_nano.txt ${DEPLOYDIR}/boot.scr
+    fi
+      
+    if [ "${MACHINE}" = "mod_imx8m_plus" ]
+    then
+      mkimage -T script -n bootscript -C none -d ${WORKDIR}/boot_plus.txt ${DEPLOYDIR}/boot.scr
+    fi
 }
 
 UBOOT_TAGGED_BINARY ?= "u-boot-tagged.${UBOOT_SUFFIX}"

@@ -18,7 +18,7 @@ index 71f3758c3..19be3e91c 100644
  	/* peripherals domain permission */
  	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),
 -	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
-+	RDC_PDAPn(RDC_PDAP_UART1, D0R | D0W),
++	RDC_PDAPn(RDC_PDAP_UART3, D0R | D0W),
  	RDC_PDAPn(RDC_PDAP_RDC, D0R | D0W | D1R),
  
  	/* memory region */
@@ -31,7 +31,7 @@ index 22846f289..fb5bef02d 100644
  $(eval $(call add_define,BL32_SIZE))
  
 -IMX_BOOT_UART_BASE	?=	0x30890000
-+IMX_BOOT_UART_BASE	?=	0x30860000
++IMX_BOOT_UART_BASE	?=	0x30880000
  $(eval $(call add_define,IMX_BOOT_UART_BASE))
  
  ifeq (${SPD},trusty)
