@@ -23,7 +23,7 @@ PROVIDES += "u-boot"
 UBOOT_SRC ?= "git://github.com/rbz-embedded-logics/uboot-imx-rbz.git;protocol=https"
 SRCBRANCH = "main"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "365601380f2e514ecdb3596587971f3cc193db0d"
+SRCREV = "e7f9d198425d9e5c4b7d5f43d6895edd71e5f7f0"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-rbz:"
 
