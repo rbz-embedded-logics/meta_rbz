@@ -1,3 +1,3 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/alsa-state:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/alsa-state:"
 
-SRC_URI_append = " file://asound.state"
+SRC_URI:append = " file://asound.state"

@@ -158,9 +158,6 @@ echo >> conf/local.conf
 echo "# Switch to Debian packaging and include package-management in the image" >> conf/local.conf
 echo "# PACKAGE_CLASSES = \"package_deb\"" >> conf/local.conf
 echo "# EXTRA_IMAGE_FEATURES += \"package-management\"" >> conf/local.conf
-echo "IMAGE_INSTALL_append = \"packagegroup-imx-ml libgpiod libgpiod-tools opencv-apps opencv-dev python3-opencv python3-modules\"" >> conf/local.conf
-echo "TOOLCHAIN_TARGET_TASK_append += \" tensorflow-lite-dev armnn-dev onnxruntime-dev\"" >> conf/local.conf
-echo "PACKAGECONFIG_append_pn-opencv_mx8 += \" tests tests-imx\"" >> conf/local.conf
 
 if [ ! -e $BUILD_DIR/conf/bblayers.conf.org ]; then
     cp $BUILD_DIR/conf/bblayers.conf $BUILD_DIR/conf/bblayers.conf.org
@@ -186,19 +183,10 @@ echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-gnome\"" >> $BUILD
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-networking\"" >> $BUILD_DIR/conf/bblayers.conf
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-filesystems\"" >> $BUILD_DIR/conf/bblayers.conf
 
-echo "BBLAYERS += \"\${BSPDIR}/sources/meta-qt5\"" >> $BUILD_DIR/conf/bblayers.conf
-echo "BBLAYERS += \"\${BSPDIR}/sources/meta-python2\"" >> $BUILD_DIR/conf/bblayers.conf
+echo "BBLAYERS += \"\${BSPDIR}/sources/meta-qt6\"" >> $BUILD_DIR/conf/bblayers.conf
 
 # Enable docker for mx8 machines
 echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> conf/bblayers.conf
-
-if [ -d ../sources/meta-ivi ]; then
-    echo -e "\n## Genivi layers" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-gplv2\"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-ivi/meta-ivi\"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-ivi/meta-ivi-bsp\"" >> $BUILD_DIR/conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-ivi/meta-ivi-test\"" >> $BUILD_DIR/conf/bblayers.conf
-fi
 
 # Enable RBZ layer
 echo "" >> $BUILD_DIR/conf/bblayers.conf

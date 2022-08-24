@@ -6,10 +6,10 @@ require recipes-bsp/u-boot/u-boot.inc
 
 DESCRIPTION = "i.MX U-Boot suppporting RBZ modules."
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-DEPENDS += "flex-native bison-native bc-native dtc-native u-boot-mkimage-native"
+DEPENDS += "flex-native bison-native bc-native dtc-native gnutls-native python3-native python3-setuptools-native swig-native u-boot-mkimage-native"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
@@ -21,13 +21,13 @@ BOOT_TOOLS = "imx-boot-tools"
 PROVIDES += "u-boot"
 
 UBOOT_SRC ?= "git://github.com/rbz-embedded-logics/uboot-imx-rbz.git;protocol=https"
-SRCBRANCH = "main"
+SRCBRANCH = "v2022.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-SRCREV = "e7f9d198425d9e5c4b7d5f43d6895edd71e5f7f0"
+SRCREV = "74471f6441141acf04334c79b7f19b5342a9fbc9"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-rbz:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-rbz:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
   file://boot_mini.txt \
   file://boot_nano.txt \
   file://boot_plus.txt \
@@ -35,7 +35,7 @@ SRC_URI_append = " \
 
 LOCALVERSION = "-${SRCBRANCH}"
 
-do_deploy_append_mx8m() {
+do_deploy:append:mx8m-nxp-bsp() {
     # Deploy u-boot-nodtb.bin and fsl-imx8m*-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
@@ -71,26 +71,5 @@ do_deploy_append_mx8m() {
     fi
 }
 
-UBOOT_TAGGED_BINARY ?= "u-boot-tagged.${UBOOT_SUFFIX}"
-
-deploy_tag() {
-    # Append a tag to the bootloader image used in the SD card image
-    cp ${UBOOT_BINARY} ${UBOOT_TAGGED_BINARY}
-    ln -sf ${UBOOT_TAGGED_BINARY} ${UBOOT_BINARY}
-    stat -L -cUUUBURNXXOEUZX7+A-XY5601QQWWZ%sEND ${UBOOT_BINARY} >> ${UBOOT_BINARY}
-}
-
-do_deploy_append_mx6() {
-    deploy_tag
-}
-
-do_deploy_append_mx7() {
-    deploy_tag
-}
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
-
-UBOOT_NAME_mx6 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-UBOOT_NAME_mx7 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+COMPATIBLE_MACHINE = "(mx8-generic-bsp)"

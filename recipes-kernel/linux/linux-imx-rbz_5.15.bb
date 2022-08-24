@@ -1,8 +1,10 @@
 # Adapted from linux-imx.inc, copyright (C) 2013, 2014 O.S.
 
-#require recipes-kernel/linux/linux-imx.inc
+require recipes-kernel/linux/linux-imx.inc
 
 SUMMARY = "Linux kernel for RBZ modules"
+DESCRIPTION = "Linux Kernel provided and supported by NXP with focus on \
+i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU and IPU."
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
@@ -12,11 +14,11 @@ DEPENDS += "lzop-native bc-native"
 inherit kernel-yocto kernel fsl-kernel-localversion fsl-vivante-kernel-driver-handler
 
 LOCALVERSION ?= ""
-SRCBRANCH = "main"
-SRCREV = "3161350230d3075b16b1297d84ca08b4c8e7c1f2"
+SRCBRANCH = "5.15.32_2.0.0"
+SRCREV = "29f4b073af82d3106510e8d3764437737ec17f11"
 
 
-SRC_URI = "git://github.com/rbz-embedded-logics/linux-imx-rbz.git;protocol=git;branch=${SRCBRANCH} \
+SRC_URI = "git://github.com/rbz-embedded-logics/linux-imx-rbz.git;protocol=https;branch=${SRCBRANCH} \
 "
 
 S = "${WORKDIR}/git"
@@ -26,29 +28,24 @@ S = "${WORKDIR}/git"
 #
 # LINUX_VERSION define should match to the kernel version referenced by SRC_URI and
 # should be updated once patchlevel is merged.
-LINUX_VERSION = "5.10.72"
-
-# Set the PV to the correct kernel version to satisfy the kernel version sanity check
-PV = "${LINUX_VERSION}+git${SRCPV}"
-
-FILES_${KERNEL_PACKAGE_NAME}-base += "${nonarch_base_libdir}/modules/${KERNEL_VERSION}/modules.builtin.modinfo "
+LINUX_VERSION = "5.15.32"
 
 KERNEL_CONFIG_COMMAND = "oe_runmake_call -C ${S} CC="${KERNEL_CC}" O=${B} olddefconfig"
 
 DEFAULT_PREFERENCE = "1"
 
 DO_CONFIG_V7_COPY = "no"
-DO_CONFIG_V7_COPY_mx6 = "yes"
-DO_CONFIG_V7_COPY_mx7 = "yes"
-DO_CONFIG_V7_COPY_mx8 = "no"
+DO_CONFIG_V7_COPY:mx6-nxp-bsp = "yes"
+DO_CONFIG_V7_COPY:mx7-nxp-bsp = "yes"
+DO_CONFIG_V7_COPY:mx8-nxp-bsp = "no"
 
 # Add setting for LF Mainline build
 IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_defconfig"
 IMX_KERNEL_CONFIG_AARCH64 = "imx_v8_defconfig"
 KBUILD_DEFCONFIG ?= ""
-KBUILD_DEFCONFIG_mx6= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG_mx7= "${IMX_KERNEL_CONFIG_AARCH32}"
-KBUILD_DEFCONFIG_mx8= "${IMX_KERNEL_CONFIG_AARCH64}"
+KBUILD_DEFCONFIG:mx6-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx7-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH32}"
+KBUILD_DEFCONFIG:mx8-nxp-bsp= "${IMX_KERNEL_CONFIG_AARCH64}"
 
 
 # Use a verbatim copy of the defconfig from the linux-imx repo.
@@ -91,6 +88,7 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_kernel_localversion after do_copy_defconfig
 
-KERNEL_VERSION_SANITY_SKIP="1"
+do_kernel_configcheck[noexec] = "1"
 
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+KERNEL_VERSION_SANITY_SKIP="1"
+COMPATIBLE_MACHINE = "(imx-nxp-bsp|mod_imx8m_nano)"

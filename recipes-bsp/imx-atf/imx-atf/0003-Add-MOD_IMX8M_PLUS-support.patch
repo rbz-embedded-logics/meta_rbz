@@ -1,20 +1,20 @@
-From 441b95090ab40dc91b60812dd71c80e5de2459f1 Mon Sep 17 00:00:00 2001
-From: Marina Calvo <mcalvo@rbz.es>
-Date: Fri, 17 Dec 2021 12:52:14 +0000
-Subject: [PATCH] Add MOD_IMX8M_PLUS support
+From 814824eae46a1bb33dde1af44e0cea2fbc19018f Mon Sep 17 00:00:00 2001
+From: camor <camor@rbz.es>
+Date: Wed, 20 Jul 2022 07:07:34 +0000
+Subject: [PATCH 3/3] Add MOD_IMX8M_PLUS support
 
-Signed-off-by: Marina Calvo <mcalvo@rbz.es>
+Signed-off-by: camor <camor@rbz.es>
 ---
  plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c | 2 +-
  plat/imx/imx8m/imx8mp/platform.mk         | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
-index 29c875437..80f75888f 100644
+index 348f90045..3d0f864e1 100644
 --- a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
 +++ b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
-@@ -50,7 +50,7 @@ static const struct imx_rdc_cfg rdc[] = {
- 	RDC_MDAn(RDC_MDA_M7, DID1),
+@@ -73,7 +73,7 @@ static const struct imx_rdc_cfg rdc[] = {
+ 
  
  	/* peripherals domain permission */
 -	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
@@ -23,10 +23,10 @@ index 29c875437..80f75888f 100644
  	RDC_PDAPn(RDC_PDAP_RDC, D0R | D0W | D1R),
  
 diff --git a/plat/imx/imx8m/imx8mp/platform.mk b/plat/imx/imx8m/imx8mp/platform.mk
-index d7999d846..bad41a4a7 100644
+index fd63d257d..df0337a89 100644
 --- a/plat/imx/imx8m/imx8mp/platform.mk
 +++ b/plat/imx/imx8m/imx8mp/platform.mk
-@@ -61,7 +61,7 @@ $(eval $(call add_define,BL32_BASE))
+@@ -154,7 +154,7 @@ $(eval $(call add_define,BL32_BASE))
  BL32_SIZE		?=	0x2000000
  $(eval $(call add_define,BL32_SIZE))
  
@@ -34,7 +34,7 @@ index d7999d846..bad41a4a7 100644
 +IMX_BOOT_UART_BASE	?=	0x30880000
  $(eval $(call add_define,IMX_BOOT_UART_BASE))
  
- ifeq (${SPD},trusty)
+ $(eval $(call add_define,IMX8M_DDR4_DVFS))
 -- 
 2.17.1
 
