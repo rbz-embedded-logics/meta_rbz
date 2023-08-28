@@ -1,0 +1,45 @@
+From a25b253f7c909cdb7bd3abbce1b4b2867928a8b9 Mon Sep 17 00:00:00 2001
+From: camor <camor@rbz.es>
+Date: Wed, 9 Aug 2023 12:39:13 +0000
+Subject: [PATCH] changes for rbz modules
+
+Signed-off-by: camor <camor@rbz.es>
+---
+ core/arch/arm/plat-imx/conf.mk | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/core/arch/arm/plat-imx/conf.mk b/core/arch/arm/plat-imx/conf.mk
+index 1d5081f96..d3e61a19d 100644
+--- a/core/arch/arm/plat-imx/conf.mk
++++ b/core/arch/arm/plat-imx/conf.mk
+@@ -377,8 +377,8 @@ CFG_UART_BASE ?= UART1_BASE
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mmevk))
+-CFG_DDR_SIZE ?= 0x80000000
+-CFG_UART_BASE ?= UART2_BASE
++CFG_DDR_SIZE ?= 0x40000000
++CFG_UART_BASE ?= UART3_BASE
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mm_cl_iot_gate))
+@@ -389,13 +389,13 @@ CFG_NSEC_DDR_1_SIZE ?= 0x40000000UL
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mnevk))
+-CFG_DDR_SIZE ?= 0x80000000
+-CFG_UART_BASE ?= UART2_BASE
++CFG_DDR_SIZE ?= 0x40000000
++CFG_UART_BASE ?= UART3_BASE
+ endif
+ 
+ ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mpevk))
+ CFG_DDR_SIZE ?= UL(0x180000000)
+-CFG_UART_BASE ?= UART2_BASE
++CFG_UART_BASE ?= UART3_BASE
+ $(call force,CFG_CORE_LARGE_PHYS_ADDR,y)
+ $(call force,CFG_CORE_ARM64_PA_BITS,36)
+ endif
+-- 
+2.25.1
+

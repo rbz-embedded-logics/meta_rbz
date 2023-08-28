@@ -1,0 +1,49 @@
+From ce4d93e394a9da6d23ebcecd5c30758fc618eb4c Mon Sep 17 00:00:00 2001
+From: camor <camor@rbz.es>
+Date: Tue, 8 Aug 2023 15:18:36 +0000
+Subject: [PATCH 1/3] Add MOD_IMX8M_PLUS support
+
+Signed-off-by: camor <camor@rbz.es>
+---
+ plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c | 4 ++--
+ plat/imx/imx8m/imx8mp/platform.mk         | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
+index ac39f5f79..888b87c77 100644
+--- a/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
++++ b/plat/imx/imx8m/imx8mp/imx8mp_bl31_setup.c
+@@ -74,7 +74,7 @@ static const struct imx_rdc_cfg rdc[] = {
+ 
+ 
+ 	/* peripherals domain permission */
+-	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
++	RDC_PDAPn(RDC_PDAP_UART3, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_WDOG1, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_RDC, D0R | D0W | D1R),
+ 
+@@ -136,7 +136,7 @@ static const struct imx_rdc_cfg rdc[] = {
+ 	RDC_MDAn(RDC_MDA_M7, DID1),
+ 
+ 	/* peripherals domain permission */
+-	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
++	RDC_PDAPn(RDC_PDAP_UART3, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_WDOG1, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_RDC, D0R | D0W | D1R),
+ 
+diff --git a/plat/imx/imx8m/imx8mp/platform.mk b/plat/imx/imx8m/imx8mp/platform.mk
+index b473e547f..238117741 100644
+--- a/plat/imx/imx8m/imx8mp/platform.mk
++++ b/plat/imx/imx8m/imx8mp/platform.mk
+@@ -155,7 +155,7 @@ $(eval $(call add_define,BL32_BASE))
+ BL32_SIZE		?=	0x2000000
+ $(eval $(call add_define,BL32_SIZE))
+ 
+-IMX_BOOT_UART_BASE	?=	0x30890000
++IMX_BOOT_UART_BASE	?=	0x30880000
+ $(eval $(call add_define,IMX_BOOT_UART_BASE))
+ 
+ EL3_EXCEPTION_HANDLING := $(SDEI_SUPPORT)
+-- 
+2.25.1
+

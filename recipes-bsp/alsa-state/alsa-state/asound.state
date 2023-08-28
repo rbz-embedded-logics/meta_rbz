@@ -1,0 +1,292 @@
+state.imxmax9867 {
+	control.1 {
+		iface MIXER
+		name 'Master Playback Volume'
+		value.0 24
+		value.1 24
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 40'
+			dbmin -9999999
+			dbmax 600
+			dbvalue.0 -800
+			dbvalue.1 -800
+		}
+	}
+	control.2 {
+		iface MIXER
+		name 'Line Capture Volume'
+		value.0 15
+		value.1 15
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 15'
+			dbmin -600
+			dbmax 2400
+			dbvalue.0 2400
+			dbvalue.1 2400
+		}
+	}
+	control.3 {
+		iface MIXER
+		name 'Mic Capture Volume'
+		value.0 20
+		value.1 20
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 20'
+			dbmin 0
+			dbmax 2000
+			dbvalue.0 2000
+			dbvalue.1 2000
+		}
+	}
+	control.4 {
+		iface MIXER
+		name 'Mic Boost Capture Volume'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 3'
+			dbmin -9999999
+			dbmax 3000
+			dbvalue.0 -9999999
+			dbvalue.1 -9999999
+		}
+	}
+	control.5 {
+		iface MIXER
+		name 'Digital Sidetone Volume'
+		value 31
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 31'
+		}
+	}
+	control.6 {
+		iface MIXER
+		name 'Digital Playback Volume'
+		value 15
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 15'
+			dbmin -1500
+			dbmax 0
+			dbvalue.0 0
+		}
+	}
+	control.7 {
+		iface MIXER
+		name 'Digital Boost Playback Volume'
+		value 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 3'
+			dbmin 0
+			dbmax 1800
+			dbvalue.0 0
+		}
+	}
+	control.8 {
+		iface MIXER
+		name 'Digital Capture Volume'
+		value.0 15
+		value.1 15
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 15'
+			dbmin -1200
+			dbmax 300
+			dbvalue.0 300
+			dbvalue.1 300
+		}
+	}
+	control.9 {
+		iface MIXER
+		name 'Speaker Mode'
+		value 'Stereo Diff'
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 'Stereo Diff'
+			item.1 'Mono Diff'
+			item.2 'Stereo Cap'
+			item.3 'Mono Cap'
+			item.4 'Stereo Single'
+			item.5 'Mono Single'
+			item.6 'Stereo Single Fast'
+			item.7 'Mono Single Fast'
+		}
+	}
+	control.10 {
+		iface MIXER
+		name 'Volume Smoothing Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.11 {
+		iface MIXER
+		name 'Line ZC Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.12 {
+		iface MIXER
+		name 'DSP Filter'
+		value IIR
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 IIR
+			item.1 FIR
+		}
+	}
+	control.13 {
+		iface MIXER
+		name 'ADC Filter'
+		value Disabled
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Disabled
+			item.1 Elliptical/16/256
+			item.2 Butterworth/16/500
+			item.3 Elliptical/8/256
+			item.4 Butterworth/8/500
+			item.5 Butterworth/8-24
+		}
+	}
+	control.14 {
+		iface MIXER
+		name 'DAC Filter'
+		value Disabled
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Disabled
+			item.1 Elliptical/16/256
+			item.2 Butterworth/16/500
+			item.3 Elliptical/8/256
+			item.4 Butterworth/8/500
+			item.5 Butterworth/8-24
+		}
+	}
+	control.15 {
+		iface MIXER
+		name 'Mono Playback Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.16 {
+		iface MIXER
+		name 'Line Capture Switch'
+		value.0 false
+		value.1 false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.17 {
+		iface MIXER
+		name 'Mic Capture Switch'
+		value.0 true
+		value.1 true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.18 {
+		iface MIXER
+		name 'DMICL Mux'
+		value ADC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 ADC
+			item.1 DMIC
+		}
+	}
+	control.19 {
+		iface MIXER
+		name 'DMICR Mux'
+		value ADC
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 ADC
+			item.1 DMIC
+		}
+	}
+	control.20 {
+		iface MIXER
+		name 'Digital Sidetone Switch'
+		value.0 false
+		value.1 false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.21 {
+		iface MIXER
+		name 'Line Bypass Switch'
+		value.0 true
+		value.1 true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.22 {
+		iface MIXER
+		name 'Master Playback Switch'
+		value.0 true
+		value.1 true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+}
