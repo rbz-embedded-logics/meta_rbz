@@ -14,8 +14,8 @@ DEPENDS += "lzop-native bc-native"
 inherit kernel-yocto kernel fsl-kernel-localversion fsl-vivante-kernel-driver-handler
 
 LOCALVERSION ?= ""
-SRCBRANCH = "lf-6.1.1-1.0.0"
-SRCREV = "0c03a8468a626292c003c70cc1af07958c9cb207"
+SRCBRANCH = "lf-6.1.y"
+SRCREV = "cb5fc524cde9d9cce09db81891097a8b1fcc4ae5"
 
 
 SRC_URI = "git://github.com/rbz-embedded-logics/linux-imx-rbz.git;protocol=https;branch=${SRCBRANCH} \
