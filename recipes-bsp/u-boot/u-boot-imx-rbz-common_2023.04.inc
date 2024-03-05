@@ -7,7 +7,7 @@ UBOOT_SRC ?= "git://github.com/rbz-embedded-logics/uboot-imx-rbz.git;protocol=ht
 SRCBRANCH = "lf_v2023.04"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "2616c51f40a1624868ea3c551d707906bf5ad3f"
+SRCREV = "2616c51f40a1624868ea3c551d707906bf5ad3fb"
 
 DEPENDS += " \
     bc-native \
