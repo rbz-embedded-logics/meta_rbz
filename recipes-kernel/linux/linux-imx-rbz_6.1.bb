@@ -15,7 +15,7 @@ inherit kernel-yocto kernel fsl-kernel-localversion fsl-vivante-kernel-driver-ha
 
 LOCALVERSION ?= ""
 SRCBRANCH = "lf-6.1.y"
-SRCREV = "4f72164afd3e139169175e1542f54e303141aef9"
+SRCREV = "6fa3dff5a04b747ad13b4e5fa21f7278c0a9013c"
 
 SRC_URI = "git://github.com/rbz-embedded-logics/linux-imx-rbz.git;protocol=https;branch=${SRCBRANCH} \
 "
