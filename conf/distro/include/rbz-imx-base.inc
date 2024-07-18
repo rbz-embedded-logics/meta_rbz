@@ -2,16 +2,21 @@ require conf/distro/poky.conf
 
 DISTRO = "imx-rbz"
 DISTRO_NAME = "RBZ i.MX Release Distro"
-DISTRO_VERSION = "6.1-mickledore"
+DISTRO_VERSION = "6.6-nanbield"
 DISTROOVERRIDES = "fsl"
 
 MAINTAINER = "RBZ <info@rbz.es>"
 
-REMOVE_VULKAN_FEATURE = "vulkan"
-REMOVE_VULKAN_FEATURE:mx8-nxp-bsp = ""
-POKY_DEFAULT_DISTRO_FEATURES:remove      = "wayland ${REMOVE_VULKAN_FEATURE}"
-POKY_DEFAULT_DISTRO_FEATURES:append:mx8-nxp-bsp  = " jailhouse"
-POKY_DEFAULT_DISTRO_FEATURES:append:mx9-nxp-bsp  = " jailhouse"
+POKY_DEFAULT_DISTRO_FEATURES:remove = "${POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE}"
+POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE             ?= "wayland"
+POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE:mx6-nxp-bsp ?= "wayland vulkan"
+POKY_DEFAULT_DISTRO_FEATURES_IMX_REMOVE:mx7-nxp-bsp ?= "wayland vulkan"
+DISTRO_FEATURES:remove = "pulseaudio"
+
+POKY_DEFAULT_DISTRO_FEATURES:append = " ${POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND}"
+POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND             ?= "jailhouse"
+POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND:mx6-nxp-bsp ?= ""
+POKY_DEFAULT_DISTRO_FEATURES_IMX_APPEND:mx7-nxp-bsp ?= ""
 
 DISTRO_FEATURES:append:mx8-nxp-bsp = " virtualization"
 SKIP_META_VIRT_SANITY_CHECK = "1"
@@ -26,6 +31,8 @@ DEFAULTTUNE:mx8qm-nxp-bsp  ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8x-nxp-bsp   ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx8ulp-nxp-bsp ?= "armv8a-crc-crypto"
 DEFAULTTUNE:mx9-nxp-bsp    ?= "armv8a-crc-crypto"
+DEFAULTTUNE:mx91p-nxp-bsp  ?= "armv8a-crc-crypto"
+DEFAULTTUNE:mx93-nxp-bsp   ?= "armv8a-crc-crypto"
 
 PACKAGECONFIG:append:pn-gstreamer1.0-plugins-ugly = " x264"
 
@@ -35,3 +42,6 @@ PACKAGECONFIG:append:class-target:pn-qtquick3d      = " examples"
 PACKAGECONFIG:append:class-target:pn-qtwebengine    = " examples"
 
 PACKAGECONFIG:append:pn-systemd = " unmanaged-network"
+
+PACKAGECONFIG:append:mx93-nxp-bsp:pn-qtbase = " gles2"
+PACKAGECONFIG:remove:mx93-nxp-bsp:pn-qtbase = "no-opengl linuxfb"
